@@ -25,10 +25,10 @@ public abstract class MixinAnvilMenu extends ItemCombinerMenu
     @Shadow private int repairItemCountCost;
     @Shadow @Final private DataSlot cost;
 
-    public MixinAnvilMenu(@Nullable MenuType<?> menuType, int i, Inventory inventory, ContainerLevelAccess containerLevelAccess)
-    {
-        super(menuType, i, inventory, containerLevelAccess);
+    public MixinAnvilMenu(@Nullable MenuType<?> menuType, int i, Inventory inventory, ContainerLevelAccess containerLevelAccess, ItemCombinerMenuSlotDefinition itemCombinerMenuSlotDefinition) {
+        super(menuType, i, inventory, containerLevelAccess, itemCombinerMenuSlotDefinition);
     }
+
 
     @Inject(method = "createResult", at = @At("HEAD"), cancellable = true)
     private void onCreateResult(CallbackInfo ci)
@@ -42,10 +42,8 @@ public abstract class MixinAnvilMenu extends ItemCombinerMenu
         if(requiredMaterial == null || !right.is(requiredMaterial)) return;
 
         if (!(EnchantmentHelper.getItemEnchantmentLevel(
-                player.level().registryAccess()
-                        .registryOrThrow(Registries.ENCHANTMENT)
-                        .getHolderOrThrow(Enchantments.MENDING),
-                left) > 0)) return;
+            player.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.MENDING),
+            left) > 0)) return;
 
         if(right.is(Items.ENCHANTED_BOOK)) return;
 
