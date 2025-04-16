@@ -56,17 +56,3 @@ subprojects {
         }
     }
 }
-
-forgix {
-    group = "amc.mendingreworked"
-    mergedJarName = "mendingreworked-1210-1215-${rootProject.mod_version}.jar"
-    outputDir = "build/libs"
-    
-    forge {
-        projectName = "forge"
-    }
-    
-    fabric {
-        projectName = "fabric"
-    }
-}
