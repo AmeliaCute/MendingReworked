@@ -1,7 +1,6 @@
 package amc.mendingreworked.mixin;
 
 import amc.mendingreworked.util.ModTags;
-import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.Item;
@@ -83,7 +82,7 @@ public abstract class MixinAnvilMenu extends ItemCombinerMenu
             return itemStack.getMaxDamage() / 2;
 
         // 25% repair
-        if(material == Items.IRON_INGOT || material == Items.GOLD_INGOT)
+        if(material == Items.IRON_INGOT || material == Items.GOLD_INGOT || material == Items.DIAMOND)
             return itemStack.getMaxDamage() / 4;
 
         // 12.5% repair
