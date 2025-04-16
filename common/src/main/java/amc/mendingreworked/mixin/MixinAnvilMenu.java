@@ -37,7 +37,7 @@ public abstract class MixinAnvilMenu extends ItemCombinerMenu
         if(left.isEmpty() || right.isEmpty()) return;
 
         Item requiredMaterial = getRequiredMaterial(left);
-        if(requiredMaterial == null) return;
+        if(requiredMaterial == null || !right.is(requiredMaterial)) return;
 
         if(!(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.MENDING, left) > 0)) return;
         if(right.is(Items.ENCHANTED_BOOK)) return;
@@ -62,15 +62,16 @@ public abstract class MixinAnvilMenu extends ItemCombinerMenu
     private Item getRequiredMaterial(ItemStack itemStack)
     {
         // For wood and stone, need probably more implementations
-        if(itemStack.is(ModTags.WOOD_REPAIR)) return Items.OAK_PLANKS;
-        if(itemStack.is(ModTags.STONE_REPAIR)) return Items.COBBLESTONE;
+        if(itemStack.is(ModTags.WOOD_REPAIR))            return Items.OAK_PLANKS;
+        else if(itemStack.is(ModTags.STONE_REPAIR))      return Items.COBBLESTONE;
 
-        if(itemStack.is(ModTags.IRON_REPAIR)) return Items.IRON_INGOT;
-        if(itemStack.is(ModTags.GOLD_REPAIR)) return Items.GOLD_INGOT;
-        if(itemStack.is(ModTags.DIAMOND_REPAIR)) return Items.DIAMOND;
-        if(itemStack.is(ModTags.NETHERITE_REPAIR)) return Items.NETHERITE_SCRAP;
+        else if(itemStack.is(ModTags.IRON_REPAIR))       return Items.IRON_INGOT;
+        else if(itemStack.is(ModTags.GOLD_REPAIR))       return Items.GOLD_INGOT;
+        else if(itemStack.is(ModTags.DIAMOND_REPAIR))    return Items.DIAMOND;
+        else if(itemStack.is(ModTags.NETHERITE_REPAIR))  return Items.NETHERITE_SCRAP;
 
-        if(itemStack.is(ModTags.PRISMARINE_REPAIR)) return Items.PRISMARINE_SHARD;
+        else if(itemStack.is(ModTags.PRISMARINE_REPAIR)) return Items.PRISMARINE_SHARD;
+        else if(itemStack.is(ModTags.STRING_REPAIR))     return Items.STRING;
 
         return null;
     }
@@ -78,7 +79,7 @@ public abstract class MixinAnvilMenu extends ItemCombinerMenu
     private int getRepairAmount(ItemStack itemStack, Item material)
     {
         // 50% repair
-        if(material == Items.OAK_PLANKS || material == Items.NETHERITE_SCRAP || material == Items.COBBLESTONE)
+        if(material == Items.OAK_PLANKS || material == Items.NETHERITE_SCRAP || material == Items.COBBLESTONE || material == Items.STRING)
             return itemStack.getMaxDamage() / 2;
 
         // 25% repair

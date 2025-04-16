@@ -28,4 +28,7 @@ public class ModTags
 
     public static final TagKey<Item> PRISMARINE_REPAIR =
             TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(Mendingreworked.MOD_ID, "prismarine_repairable"));
+
+    public static final TagKey<Item> STRING_REPAIR =
+            TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(Mendingreworked.MOD_ID, "string_repairable"));
 }
