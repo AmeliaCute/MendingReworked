@@ -1,7 +1,7 @@
 package amc.mendingreworked.mixin;
 
 import amc.mendingreworked.util.ModTags;
-import net.minecraft.world.Container;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.Item;
@@ -13,6 +13,7 @@ import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -32,20 +33,30 @@ public abstract class MixinAnvilMenu extends ItemCombinerMenu
     @Inject(method = "createResult", at = @At("HEAD"), cancellable = true)
     private void onCreateResult(CallbackInfo ci)
     {
-        ItemStack left = this.inputSlots.getItem(INPUT_SLOT);
-        ItemStack right = this.inputSlots.getItem(ADDITIONAL_SLOT);
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAA 2");
+        ItemStack left = this.inputSlots.getItem(0);
+        ItemStack right = this.inputSlots.getItem(1);
         if(left.isEmpty() || right.isEmpty()) return;
 
-        Item requiredMaterial = getRequiredMaterial(left);
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAA 3");
+        Item requiredMaterial = mendingreworked$getRequiredMaterial(left);
+        System.out.println(requiredMaterial);
         if(requiredMaterial == null || !right.is(requiredMaterial)) return;
 
-        if(!(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.MENDING, left) > 0)) return;
+        if (!(EnchantmentHelper.getItemEnchantmentLevel(
+                player.level().registryAccess()
+                        .registryOrThrow(Registries.ENCHANTMENT)
+                        .getHolderOrThrow(Enchantments.MENDING),
+                left) > 0)) return;
+
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAA 4");
         if(right.is(Items.ENCHANTED_BOOK)) return;
 
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAA 5");
         int damage = left.getDamageValue();
         if(damage == 0 || damage >= left.getMaxDamage()) return;
 
-        int repairPerItem   = getRepairAmount(left, requiredMaterial);
+        int repairPerItem   = mendingreworked$getRepairAmount(left, requiredMaterial);
         int materialsNeeded = (int) Math.ceil((float) damage / repairPerItem);
         int materialUsed    = Math.min(right.getCount(), materialsNeeded);
 
@@ -56,10 +67,12 @@ public abstract class MixinAnvilMenu extends ItemCombinerMenu
         this.cost.set(1);
         this.repairItemCountCost = materialUsed;
 
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAA 6");
         ci.cancel();
     }
 
-    private Item getRequiredMaterial(ItemStack itemStack)
+    @Unique
+    private Item mendingreworked$getRequiredMaterial(ItemStack itemStack)
     {
         // For wood and stone, need probably more implementations
         if(itemStack.is(ModTags.WOOD_REPAIR))            return Items.OAK_PLANKS;
@@ -76,7 +89,8 @@ public abstract class MixinAnvilMenu extends ItemCombinerMenu
         return null;
     }
 
-    private int getRepairAmount(ItemStack itemStack, Item material)
+    @Unique
+    private int mendingreworked$getRepairAmount(ItemStack itemStack, Item material)
     {
         // 50% repair
         if(material == Items.OAK_PLANKS || material == Items.NETHERITE_SCRAP || material == Items.COBBLESTONE || material == Items.STRING)
