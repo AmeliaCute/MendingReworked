@@ -3,10 +3,7 @@ plugins {
     id 'architectury-plugin' version '3.4-SNAPSHOT'
     id 'com.github.johnrengelman.shadow' version '8.1.1' apply false
 
-    id "io.github.pacifistmc.forgix" version '1.2.6'
-
-    id 'com.matthewprenger.cursegradle' version '1.+'
-    id "com.modrinth.minotaur" version '2.+'
+    id "io.github.pacifistmc.forgix" version "1.2.6"
 }
 
 architectury {
@@ -62,52 +59,14 @@ subprojects {
 
 forgix {
     group = "amc.mendingreworked"
-    mergedJarName = "mendingreworked-182.192-$rootProject.mod_version-universal.jar"
-    outputDir = "build/merged"
+    mergedJarName = "mendingreworked-1182-1192-${rootProject.mod_version}.jar"
+    outputDir = "build/libs"
+    
     forge {
         projectName = "forge"
     }
+    
     fabric {
         projectName = "fabric"
-    }
-}
-
-curseforge {
-    if (System.getenv("CURSEFORGE_TOKEN") != null) {
-        apiKey = System.getenv("CURSEFORGE_TOKEN")
-        project {
-            id = '1040396'
-            changelog = "Meow"
-            releaseType = 'release'
-            addGameVersion '1.18.2'
-            addGameVersion '1.19.2'
-            addGameVersion 'Fabric'
-            addGameVersion 'Forge'
-            relations {
-                optionalDependency 'fabric-api'
-                requiredDependency 'architectury-api'
-            }
-            mainArtifact(file("build/merged/mendingreworked-182.192-${rootProject.mod_version}-universal.jar"))
-        }
-        options {
-            forgeGradleIntegration = false
-        }
-    }
-}
-
-modrinth {
-    if (System.getenv("MODRINTH_TOKEN") != null) {
-        token = System.getenv("MODRINTH_TOKEN")
-        projectId = '40kBiPTu'
-        versionNumber = project.mod_version
-        uploadFile = file("build/merged/mendingreworked-182.192-${rootProject.mod_version}-universal.jar")
-        gameVersions = ['1.18.2','1.19.2']
-        versionType = 'release'
-        loaders = ['fabric', 'forge']
-        changelog = "Meow"
-        dependencies = {
-            optional.project 'P7dR8mSH', // Fabric API
-            required.project 'lhGA9TYQ'  // Architectury
-        }
     }
 }
