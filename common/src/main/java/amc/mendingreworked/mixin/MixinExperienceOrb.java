@@ -2,7 +2,6 @@ package amc.mendingreworked.mixin;
 
 import net.minecraft.core.Holder;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.ExperienceOrb;
@@ -22,13 +21,12 @@ public abstract class MixinExperienceOrb
     @Inject(method = "repairPlayerItems", at = @At("HEAD"), cancellable = true)
     public void onRepairPlayerItems(ServerPlayer serverPlayer, int i, CallbackInfoReturnable<Integer> cir)
     {
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAA 1");
-        if (hasMending(serverPlayer.getMainHandItem(), serverPlayer.level().registryAccess()) || hasMending(serverPlayer.getOffhandItem(), serverPlayer.level().registryAccess()))
+        if (mendingreworked$hasMending(serverPlayer.getMainHandItem(), serverPlayer.level().registryAccess()) || mendingreworked$hasMending(serverPlayer.getOffhandItem(), serverPlayer.level().registryAccess()))
             cir.cancel();
     }
 
     @Unique
-    private boolean hasMending(ItemStack itemStack, RegistryAccess registryAccess)
+    private boolean mendingreworked$hasMending(ItemStack itemStack, RegistryAccess registryAccess)
     {
         Holder<Enchantment> mendingHolder = registryAccess.registryOrThrow(Registries.ENCHANTMENT)
                 .getHolderOrThrow(Enchantments.MENDING);

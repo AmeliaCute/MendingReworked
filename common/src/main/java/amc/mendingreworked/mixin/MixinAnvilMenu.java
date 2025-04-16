@@ -33,12 +33,10 @@ public abstract class MixinAnvilMenu extends ItemCombinerMenu
     @Inject(method = "createResult", at = @At("HEAD"), cancellable = true)
     private void onCreateResult(CallbackInfo ci)
     {
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAA 2");
         ItemStack left = this.inputSlots.getItem(0);
         ItemStack right = this.inputSlots.getItem(1);
         if(left.isEmpty() || right.isEmpty()) return;
 
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAA 3");
         Item requiredMaterial = mendingreworked$getRequiredMaterial(left);
         System.out.println(requiredMaterial);
         if(requiredMaterial == null || !right.is(requiredMaterial)) return;
@@ -49,10 +47,8 @@ public abstract class MixinAnvilMenu extends ItemCombinerMenu
                         .getHolderOrThrow(Enchantments.MENDING),
                 left) > 0)) return;
 
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAA 4");
         if(right.is(Items.ENCHANTED_BOOK)) return;
 
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAA 5");
         int damage = left.getDamageValue();
         if(damage == 0 || damage >= left.getMaxDamage()) return;
 
@@ -67,7 +63,6 @@ public abstract class MixinAnvilMenu extends ItemCombinerMenu
         this.cost.set(1);
         this.repairItemCountCost = materialUsed;
 
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAA 6");
         ci.cancel();
     }
 
@@ -75,16 +70,17 @@ public abstract class MixinAnvilMenu extends ItemCombinerMenu
     private Item mendingreworked$getRequiredMaterial(ItemStack itemStack)
     {
         // For wood and stone, need probably more implementations
-        if(itemStack.is(ModTags.WOOD_REPAIR))            return Items.OAK_PLANKS;
-        else if(itemStack.is(ModTags.STONE_REPAIR))      return Items.COBBLESTONE;
+        if(itemStack.is(ModTags.WOOD_REPAIR))       return Items.OAK_PLANKS;
+        if(itemStack.is(ModTags.STONE_REPAIR))      return Items.COBBLESTONE;
 
-        else if(itemStack.is(ModTags.IRON_REPAIR))       return Items.IRON_INGOT;
-        else if(itemStack.is(ModTags.GOLD_REPAIR))       return Items.GOLD_INGOT;
-        else if(itemStack.is(ModTags.DIAMOND_REPAIR))    return Items.DIAMOND;
-        else if(itemStack.is(ModTags.NETHERITE_REPAIR))  return Items.NETHERITE_SCRAP;
+        if(itemStack.is(ModTags.IRON_REPAIR))       return Items.IRON_INGOT;
+        if(itemStack.is(ModTags.GOLD_REPAIR))       return Items.GOLD_INGOT;
+        if(itemStack.is(ModTags.DIAMOND_REPAIR))    return Items.DIAMOND;
+        if(itemStack.is(ModTags.NETHERITE_REPAIR))  return Items.NETHERITE_SCRAP;
 
-        else if(itemStack.is(ModTags.PRISMARINE_REPAIR)) return Items.PRISMARINE_SHARD;
-        else if(itemStack.is(ModTags.STRING_REPAIR))     return Items.STRING;
+        if(itemStack.is(ModTags.BREEZE_REPAIR)) return Items.BREEZE_ROD;
+        if(itemStack.is(ModTags.PRISMARINE_REPAIR)) return Items.PRISMARINE_SHARD;
+        if(itemStack.is(ModTags.STRING_REPAIR))     return Items.STRING;
 
         return null;
     }
