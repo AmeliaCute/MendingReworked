@@ -63,15 +63,15 @@ public abstract class MixinAnvilMenu extends ItemCombinerMenu
     {
         // For wood and stone, need probably more implementations
         if(itemStack.is(ModTags.WOOD_REPAIR))            return Items.OAK_PLANKS;
-        else if(itemStack.is(ModTags.STONE_REPAIR))      return Items.COBBLESTONE;
+        if(itemStack.is(ModTags.STONE_REPAIR))      return Items.COBBLESTONE;
 
-        else if(itemStack.is(ModTags.IRON_REPAIR))       return Items.IRON_INGOT;
-        else if(itemStack.is(ModTags.GOLD_REPAIR))       return Items.GOLD_INGOT;
-        else if(itemStack.is(ModTags.DIAMOND_REPAIR))    return Items.DIAMOND;
-        else if(itemStack.is(ModTags.NETHERITE_REPAIR))  return Items.NETHERITE_SCRAP;
+        if(itemStack.is(ModTags.IRON_REPAIR))       return Items.IRON_INGOT;
+        if(itemStack.is(ModTags.GOLD_REPAIR))       return Items.GOLD_INGOT;
+        if(itemStack.is(ModTags.DIAMOND_REPAIR))    return Items.DIAMOND;
+        if(itemStack.is(ModTags.NETHERITE_REPAIR))  return Items.NETHERITE_SCRAP;
 
-        else if(itemStack.is(ModTags.PRISMARINE_REPAIR)) return Items.PRISMARINE_SHARD;
-        else if(itemStack.is(ModTags.STRING_REPAIR))     return Items.STRING;
+        if(itemStack.is(ModTags.PRISMARINE_REPAIR)) return Items.PRISMARINE_SHARD;
+        if(itemStack.is(ModTags.STRING_REPAIR))     return Items.STRING;
 
         return null;
     }
