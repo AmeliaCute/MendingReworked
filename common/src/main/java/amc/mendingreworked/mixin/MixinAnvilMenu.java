@@ -38,7 +38,6 @@ public abstract class MixinAnvilMenu extends ItemCombinerMenu
         if(left.isEmpty() || right.isEmpty()) return;
 
         Item requiredMaterial = mendingreworked$getRequiredMaterial(left);
-        System.out.println(requiredMaterial);
         if(requiredMaterial == null || !right.is(requiredMaterial)) return;
 
         if (!(EnchantmentHelper.getItemEnchantmentLevel(
