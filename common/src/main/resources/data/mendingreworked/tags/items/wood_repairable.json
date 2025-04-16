@@ -1,10 +1,10 @@
 {
   "replace": false,
   "values": [
-    "minecraft:wood_sword",
-    "minecraft:wood_pickaxe",
-    "minecraft:wood_axe",
-    "minecraft:wood_shovel",
-    "minecraft:wood_hoe"
+    "minecraft:wooden_sword",
+    "minecraft:wooden_pickaxe",
+    "minecraft:wooden_axe",
+    "minecraft:wooden_shovel",
+    "minecraft:wooden_hoe"
   ]
 }
