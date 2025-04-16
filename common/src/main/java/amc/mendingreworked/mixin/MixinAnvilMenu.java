@@ -45,7 +45,7 @@ public abstract class MixinAnvilMenu extends ItemCombinerMenu
         int damage = left.getDamageValue();
         if(damage == 0 || damage >= left.getMaxDamage()) return;
 
-        int repairPerItem = getRepairAmount(left, requiredMaterial);
+        int repairPerItem   = getRepairAmount(left, requiredMaterial);
         int materialsNeeded = (int) Math.ceil((float) damage / repairPerItem);
         int materialUsed    = Math.min(right.getCount(), materialsNeeded);
 
@@ -83,7 +83,7 @@ public abstract class MixinAnvilMenu extends ItemCombinerMenu
             return itemStack.getMaxDamage() / 2;
 
         // 25% repair
-        if(material == Items.IRON_INGOT || material == Items.GOLD_INGOT)
+        if(material == Items.IRON_INGOT || material == Items.GOLD_INGOT || material == Items.DIAMOND)
             return itemStack.getMaxDamage() / 4;
 
         // 12.5% repair
