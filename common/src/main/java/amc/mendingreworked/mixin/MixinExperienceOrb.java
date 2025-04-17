@@ -21,8 +21,9 @@ public abstract class MixinExperienceOrb
     @Inject(method = "repairPlayerItems", at = @At("HEAD"), cancellable = true)
     public void onRepairPlayerItems(ServerPlayer serverPlayer, int i, CallbackInfoReturnable<Integer> cir)
     {
-        if (mendingreworked$hasMending(serverPlayer.getMainHandItem(), serverPlayer.level().registryAccess()) || mendingreworked$hasMending(serverPlayer.getOffhandItem(), serverPlayer.level().registryAccess()))
+        if (mendingreworked$hasMending(serverPlayer.getMainHandItem(), serverPlayer.level().registryAccess()) || mendingreworked$hasMending(serverPlayer.getOffhandItem(), serverPlayer.level().registryAccess())) {
             cir.cancel();
+        }
     }
 
     @Unique
