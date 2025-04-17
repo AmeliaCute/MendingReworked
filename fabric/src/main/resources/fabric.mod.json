@@ -2,10 +2,10 @@
   "schemaVersion": 1,
   "id": "mendingreworked",
   "version": "${version}",
-  "name": "MendingReworked",
-  "description": "Rework of Mending",
+  "name": "mendingreworked",
+  "description": "",
   "authors": [
-    "AmeliaCute"
+    ""
   ],
   "contact": {
     "homepage": ""
@@ -15,20 +15,20 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "amc.mendingreworked.fabric.MendingreworkedFabric"
+      "AmeliaCute.mendingreworked.fabric.MendingreworkedFabric"
     ],
     "client": [
-      "amc.mendingreworked.fabric.client.MendingreworkedFabricClient"
+      "AmeliaCute.mendingreworked.fabric.client.MendingreworkedFabricClient"
     ]
   },
   "mixins": [
     "mendingreworked.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.16.13",
+    "fabricloader": ">=0.16.14",
     "minecraft": ">=1.21 <=1.21.5",
-    "java": ">=17",
-    "architectury": ">=13.0.1",
+    "java": ">=21",
+    "architectury": ">=13.0.8",
     "fabric-api": "*"
   },
   "suggests": {
