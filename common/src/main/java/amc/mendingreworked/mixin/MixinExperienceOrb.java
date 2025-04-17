@@ -17,7 +17,11 @@ public abstract class MixinExperienceOrb
     @Inject(method = "repairPlayerItems", at = @At("HEAD"), cancellable = true)
     public void onRepairPlayerItems(Player player, int i, CallbackInfoReturnable<Integer> cir)
     {
-        if(hasMending(player.getMainHandItem()) || hasMending(player.getOffhandItem())) cir.cancel();
+        if(hasMending(player.getMainHandItem()) || hasMending(player.getOffhandItem()))
+        {
+            player.giveExperiencePoints(i);
+            cir.cancel();
+        }
     }
 
     @Unique
