@@ -5,6 +5,5 @@ public final class Mendingreworked {
 
     public static void init()
     {
-        System.err.println("fg fdjgdjh jgljfdghlfdjgdf");   
     }
 }

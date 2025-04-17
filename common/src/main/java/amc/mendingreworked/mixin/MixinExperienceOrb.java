@@ -9,7 +9,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ExperienceOrb.class)
@@ -18,7 +17,11 @@ public abstract class MixinExperienceOrb
     @Inject(method = "repairPlayerItems", at = @At("HEAD"), cancellable = true)
     public void onRepairPlayerItems(Player player, int i, CallbackInfoReturnable<Integer> cir)
     {
-        if(hasMending(player.getMainHandItem()) || hasMending(player.getOffhandItem())) cir.cancel();
+        if(hasMending(player.getMainHandItem()) || hasMending(player.getOffhandItem()))
+        {
+            player.giveExperiencePoints(i);
+            cir.cancel();
+        }
     }
 
     @Unique
