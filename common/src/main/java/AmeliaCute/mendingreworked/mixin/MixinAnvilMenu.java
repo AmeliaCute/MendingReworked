@@ -1,6 +1,6 @@
-package amc.mendingreworked.mixin;
+package AmeliaCute.mendingreworked.mixin;
 
-import amc.mendingreworked.util.ModTags;
+import AmeliaCute.mendingreworked.util.ModTags;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.Item;

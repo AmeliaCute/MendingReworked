@@ -1,4 +1,4 @@
-package amc.mendingreworked.mixin;
+package AmeliaCute.mendingreworked.mixin;
 
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.player.Player;

@@ -1,6 +1,6 @@
 package amc.mendingreworked.fabric;
 
-import amc.mendingreworked.Mendingreworked;
+import AmeliaCute.mendingreworked.Mendingreworked;
 import net.fabricmc.api.ModInitializer;
 
 public final class MendingreworkedFabric implements ModInitializer {

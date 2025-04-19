@@ -1,6 +1,6 @@
-package amc.mendingreworked.util;
+package AmeliaCute.mendingreworked.util;
 
-import amc.mendingreworked.Mendingreworked;
+import AmeliaCute.mendingreworked.Mendingreworked;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;

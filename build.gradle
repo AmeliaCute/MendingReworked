@@ -58,7 +58,7 @@ subprojects {
 }
 
 forgix {
-    group = "amc.mendingreworked"
+    group = "AmeliaCute.mendingreworked"
     mergedJarName = "mendingreworked-${rootProject.mod_version}.jar"
     outputDir = "build/libs"
     

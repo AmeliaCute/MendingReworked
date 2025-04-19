@@ -1,6 +1,6 @@
 package amc.mendingreworked.forge;
 
-import amc.mendingreworked.Mendingreworked;
+import AmeliaCute.mendingreworked.Mendingreworked;
 import dev.architectury.platform.forge.EventBuses;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
