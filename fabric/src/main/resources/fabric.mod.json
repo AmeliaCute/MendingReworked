@@ -15,10 +15,10 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "amc.mendingreworked.fabric.MendingreworkedFabric"
+      "AmeliaCute.mendingreworked.fabric.MendingreworkedFabric"
     ],
     "client": [
-      "amc.mendingreworked.fabric.client.MendingreworkedFabricClient"
+      "AmeliaCute.mendingreworked.fabric.client.MendingreworkedFabricClient"
     ]
   },
   "mixins": [

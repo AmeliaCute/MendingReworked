@@ -1,4 +1,4 @@
-package amc.mendingreworked.fabric.client;
+package AmeliaCute.mendingreworked.fabric.client;
 
 import net.fabricmc.api.ClientModInitializer;
 

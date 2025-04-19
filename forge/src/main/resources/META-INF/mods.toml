@@ -7,11 +7,11 @@ license = "MIT"
 modId = "mendingreworked"
 version = "${version}"
 displayName = "MendingReworked"
-authors = ""
+authors = "AmeliaCute"
 description = '''
 
 '''
-#logoFile = ""
+logoFile = "icon.png"
 
 [[dependencies.mendingreworked]]
 modId = "forge"
