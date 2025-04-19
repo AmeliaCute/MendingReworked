@@ -1,6 +1,6 @@
-package amc.mendingreworked.mixin;
+package AmeliaCute.mendingreworked.mixin;
 
-import amc.mendingreworked.util.ModTags;
+import AmeliaCute.mendingreworked.util.ModTags;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.*;
@@ -37,8 +37,7 @@ public abstract class MixinAnvilMenu extends ItemCombinerMenu
         ItemStack right = this.inputSlots.getItem(1);
         if(left.isEmpty() || right.isEmpty()) return;
 
-        Item requiredMaterial = mendingreworked$getRequiredMaterial(left);
-        System.out.println(requiredMaterial);
+        Item requiredMaterial = getRequiredMaterial(left);
         if(requiredMaterial == null || !right.is(requiredMaterial)) return;
 
         if (!(EnchantmentHelper.getItemEnchantmentLevel(
@@ -50,7 +49,7 @@ public abstract class MixinAnvilMenu extends ItemCombinerMenu
         int damage = left.getDamageValue();
         if(damage == 0 || damage >= left.getMaxDamage()) return;
 
-        int repairPerItem   = mendingreworked$getRepairAmount(left, requiredMaterial);
+        int repairPerItem   = getRepairAmount(left, requiredMaterial);
         int materialsNeeded = (int) Math.ceil((float) damage / repairPerItem);
         int materialUsed    = Math.min(right.getCount(), materialsNeeded);
 
@@ -65,7 +64,7 @@ public abstract class MixinAnvilMenu extends ItemCombinerMenu
     }
 
     @Unique
-    private Item mendingreworked$getRequiredMaterial(ItemStack itemStack)
+    private Item getRequiredMaterial(ItemStack itemStack)
     {
         // For wood and stone, need probably more implementations
         if(itemStack.is(ModTags.WOOD_REPAIR))       return Items.OAK_PLANKS;
@@ -84,7 +83,7 @@ public abstract class MixinAnvilMenu extends ItemCombinerMenu
     }
 
     @Unique
-    private int mendingreworked$getRepairAmount(ItemStack itemStack, Item material)
+    private int getRepairAmount(ItemStack itemStack, Item material)
     {
         // 50% repair
         if(material == Items.OAK_PLANKS || material == Items.NETHERITE_SCRAP || material == Items.COBBLESTONE || material == Items.STRING)

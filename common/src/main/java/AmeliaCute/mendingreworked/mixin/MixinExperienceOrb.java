@@ -1,4 +1,4 @@
-package amc.mendingreworked.mixin;
+package AmeliaCute.mendingreworked.mixin;
 
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
@@ -19,7 +19,7 @@ public abstract class MixinExperienceOrb
     @Inject(method = "repairPlayerItems", at = @At("HEAD"), cancellable = true)
     public void onRepairPlayerItems(ServerPlayer serverPlayer, int i, CallbackInfoReturnable<Integer> cir)
     {
-        if (mendingreworked$hasMending(serverPlayer.getMainHandItem(), serverPlayer.level().registryAccess()) || mendingreworked$hasMending(serverPlayer.getOffhandItem(), serverPlayer.level().registryAccess()))
+        if (hasMending(serverPlayer.getMainHandItem(), serverPlayer.level().registryAccess()) || hasMending(serverPlayer.getOffhandItem(), serverPlayer.level().registryAccess()))
         {
             serverPlayer.giveExperiencePoints(i);
             cir.cancel();
@@ -27,7 +27,7 @@ public abstract class MixinExperienceOrb
     }
 
     @Unique
-    private boolean mendingreworked$hasMending(ItemStack itemStack, RegistryAccess registryAccess)
+    private boolean hasMending(ItemStack itemStack, RegistryAccess registryAccess)
     {
         return EnchantmentHelper.getItemEnchantmentLevel(
                 registryAccess.lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.MENDING),

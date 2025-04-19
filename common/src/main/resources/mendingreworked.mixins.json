@@ -1,12 +1,13 @@
 {
   "required": true,
-  "package": "amc.mendingreworked.mixin",
+  "package": "AmeliaCute.mendingreworked.mixin",
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
   "client": [
   ],
   "mixins": [
     "MixinAnvilMenu",
+    "MixinEnchantmentHelper",
     "MixinExperienceOrb"
   ],
   "injectors": {
