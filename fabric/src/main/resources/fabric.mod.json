@@ -5,13 +5,13 @@
   "name": "mendingreworked",
   "description": "",
   "authors": [
-    ""
+    "AmeliaCute"
   ],
   "contact": {
     "homepage": ""
   },
   "license": "MIT",
-  "icon": "assets/mendingreworked/icon.png",
+  "icon": "icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
