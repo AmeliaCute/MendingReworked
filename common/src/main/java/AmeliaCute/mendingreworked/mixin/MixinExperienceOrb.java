@@ -17,7 +17,7 @@ public abstract class MixinExperienceOrb
     @Inject(method = "repairPlayerItems", at = @At("HEAD"), cancellable = true)
     public void onRepairPlayerItems(Player player, int i, CallbackInfoReturnable<Integer> cir)
     {
-        if(hasMending(player.getMainHandItem()) || hasMending(player.getOffhandItem()))
+        if(hasMending(player.getMainHandItem()) || hasMending(player.getOffhandItem()) || isWearingMending(player))
         {
             player.giveExperiencePoints(i);
             cir.cancel();
@@ -28,5 +28,15 @@ public abstract class MixinExperienceOrb
     private boolean hasMending(ItemStack itemStack)
     {
         return EnchantmentHelper.getItemEnchantmentLevel(Enchantments.MENDING, itemStack) > 0;
+    }
+
+    @Unique
+    private boolean isWearingMending(Player player)
+    {
+        for (ItemStack stack : player.getInventory().armor)
+        {
+            if (hasMending(stack)) return true;
+        }
+        return false;
     }
 }
