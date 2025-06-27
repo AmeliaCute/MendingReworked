@@ -31,8 +31,8 @@ public abstract class MixinAnvilMenu extends ItemCombinerMenu
     @Inject(method = "createResult", at = @At("HEAD"), cancellable = true)
     private void onCreateResult(CallbackInfo ci)
     {
-        ItemStack left = this.inputSlots.getItem(INPUT_SLOT);
-        ItemStack right = this.inputSlots.getItem(ADDITIONAL_SLOT);
+        ItemStack left = this.inputSlots.getItem(0);
+        ItemStack right = this.inputSlots.getItem(1);
         if(left.isEmpty() || right.isEmpty()) return;
 
         Item requiredMaterial = getRequiredMaterial(left);
