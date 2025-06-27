@@ -21,7 +21,7 @@ public abstract class MixinExperienceOrb
     @Inject(method = "repairPlayerItems", at = @At("HEAD"), cancellable = true)
     public void onRepairPlayerItems(ServerPlayer serverPlayer, int i, CallbackInfoReturnable<Integer> cir)
     {
-        if (mendingreworked$hasMending(serverPlayer.getMainHandItem(), serverPlayer.level().registryAccess()) || mendingreworked$hasMending(serverPlayer.getOffhandItem(), serverPlayer.level().registryAccess()))
+        if (hasMending(serverPlayer.getMainHandItem(), serverPlayer.level().registryAccess()) || hasMending(serverPlayer.getOffhandItem(), serverPlayer.level().registryAccess()) || isWearingMending(serverPlayer, serverPlayer.level().registryAccess()))
         {
             serverPlayer.giveExperiencePoints(i);
             cir.cancel();
@@ -29,10 +29,20 @@ public abstract class MixinExperienceOrb
     }
 
     @Unique
-    private boolean mendingreworked$hasMending(ItemStack itemStack, RegistryAccess registryAccess)
+    private boolean hasMending(ItemStack itemStack, RegistryAccess registryAccess)
     {
         Holder<Enchantment> mendingHolder = registryAccess.registryOrThrow(Registries.ENCHANTMENT)
                 .getHolderOrThrow(Enchantments.MENDING);
         return EnchantmentHelper.getItemEnchantmentLevel(mendingHolder, itemStack) > 0;
+    }
+
+    @Unique
+    private boolean isWearingMending(ServerPlayer player, RegistryAccess registryAccess)
+    {
+        for (ItemStack stack : player.getInventory().armor)
+        {
+            if (hasMending(stack, registryAccess)) return true;
+        }
+        return false;
     }
 }
