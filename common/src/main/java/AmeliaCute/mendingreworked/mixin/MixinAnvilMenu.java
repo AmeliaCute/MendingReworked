@@ -1,6 +1,7 @@
 package AmeliaCute.mendingreworked.mixin;
 
-import AmeliaCute.mendingreworked.util.ModTags;
+import AmeliaCute.mendingreworked.util.RepairConfigLoader;
+import AmeliaCute.mendingreworked.util.RepairEntry;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.Item;
@@ -35,7 +36,10 @@ public abstract class MixinAnvilMenu extends ItemCombinerMenu
         ItemStack right = this.inputSlots.getItem(1);
         if(left.isEmpty() || right.isEmpty()) return;
 
-        Item requiredMaterial = getRequiredMaterial(left);
+        RepairEntry entry = RepairConfigLoader.INSTANCE.GetEntry(left.getItem().toString());
+        if(entry == null) return;
+
+        Item requiredMaterial = entry.getRepair();
         if(requiredMaterial == null || !right.is(requiredMaterial)) return;
 
         if(!(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.MENDING, left) > 0)) return;
@@ -44,7 +48,7 @@ public abstract class MixinAnvilMenu extends ItemCombinerMenu
         int damage = left.getDamageValue();
         if(damage == 0 || damage >= left.getMaxDamage()) return;
 
-        int repairPerItem   = getRepairAmount(left, requiredMaterial);
+        int repairPerItem   = entry.computeRepair(left);
         int materialsNeeded = (int) Math.ceil((float) damage / repairPerItem);
         int materialUsed    = Math.min(right.getCount(), materialsNeeded);
 
@@ -56,39 +60,5 @@ public abstract class MixinAnvilMenu extends ItemCombinerMenu
         this.repairItemCountCost = materialUsed;
 
         ci.cancel();
-    }
-
-    private Item getRequiredMaterial(ItemStack itemStack)
-    {
-        // For wood and stone, need probably more implementations
-        if(itemStack.is(ModTags.WOOD_REPAIR))            return Items.OAK_PLANKS;
-        if(itemStack.is(ModTags.STONE_REPAIR))      return Items.COBBLESTONE;
-
-        if(itemStack.is(ModTags.IRON_REPAIR))       return Items.IRON_INGOT;
-        if(itemStack.is(ModTags.GOLD_REPAIR))       return Items.GOLD_INGOT;
-        if(itemStack.is(ModTags.DIAMOND_REPAIR))    return Items.DIAMOND;
-        if(itemStack.is(ModTags.NETHERITE_REPAIR))  return Items.NETHERITE_SCRAP;
-
-        if(itemStack.is(ModTags.PRISMARINE_REPAIR)) return Items.PRISMARINE_SHARD;
-        if(itemStack.is(ModTags.STRING_REPAIR))     return Items.STRING;
-
-        return null;
-    }
-
-    private int getRepairAmount(ItemStack itemStack, Item material)
-    {
-        // 50% repair
-        if(material == Items.OAK_PLANKS || material == Items.NETHERITE_SCRAP || material == Items.COBBLESTONE || material == Items.STRING)
-            return itemStack.getMaxDamage() / 2;
-
-        // 25% repair
-        if(material == Items.IRON_INGOT || material == Items.GOLD_INGOT || material == Items.DIAMOND)
-            return itemStack.getMaxDamage() / 4;
-
-        // 12.5% repair
-        if(material == Items.PRISMARINE_SHARD)
-            return itemStack.getMaxDamage() / 8;
-
-        return 0;
     }
 }
