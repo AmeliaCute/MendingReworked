@@ -33,7 +33,7 @@ public class RepairConfigLoader extends SimpleJsonResourceReloadListener
             {
                 RepairEntry repairEntry = RepairEntry.fromJson(element.getAsJsonObject());
 
-                configs_entry.put(repairEntry.getItem().toString(), repairEntry);
+                configs_entry.put(repairEntry.getRawItem(), repairEntry);
             }
         }
 
