@@ -1,7 +1,10 @@
 package amc.mendingreworked.fabric;
 
 import AmeliaCute.mendingreworked.Mendingreworked;
+import AmeliaCute.mendingreworked.util.RepairConfigLoader;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.minecraft.server.packs.PackType;
 
 public final class MendingreworkedFabric implements ModInitializer {
     @Override
@@ -12,5 +15,7 @@ public final class MendingreworkedFabric implements ModInitializer {
 
         // Run our common setup.
         Mendingreworked.init();
+
+
     }
 }
