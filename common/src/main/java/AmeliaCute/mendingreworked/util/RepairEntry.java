@@ -2,6 +2,7 @@ package AmeliaCute.mendingreworked.util;
 
 import com.google.gson.JsonObject;
 import net.minecraft.core.Registry;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -41,14 +42,19 @@ public class RepairEntry
         else return new ResourceLocation(defaultModId, parts[0]);
     }
 
-    public Item getItem()
+    public Item getItem(RegistryAccess access)
     {
-        return Registry.ITEM.get(item);
+        return access.registryOrThrow(Registry.ITEM_REGISTRY).get(item);
     }
 
-    public Item getRepair()
+    public ResourceLocation getRawItem()
     {
-        return Registry.ITEM.get(repair);
+        return item;
+    }
+
+    public Item getRepair(RegistryAccess access)
+    {
+        return access.registryOrThrow(Registry.ITEM_REGISTRY).get(repair);
     }
 
     public int computeRepair(ItemStack stack)

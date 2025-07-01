@@ -5,10 +5,13 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import net.minecraft.core.Registry;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
+import net.minecraft.world.item.Item;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +20,7 @@ public class RepairConfigLoader extends SimpleJsonResourceReloadListener
 {
     public static final String FOLDER = "repair_configs";
     public static final RepairConfigLoader INSTANCE = new RepairConfigLoader();
-    private final HashMap<String, RepairEntry> configs_entry = new HashMap<>();
+    private final HashMap<ResourceLocation, RepairEntry> configs_entry = new HashMap<>();
 
     public RepairConfigLoader()
     {
@@ -35,18 +38,18 @@ public class RepairConfigLoader extends SimpleJsonResourceReloadListener
             {
                 RepairEntry repairEntry = RepairEntry.fromJson(element.getAsJsonObject());
 
-                configs_entry.put(repairEntry.getItem().toString(), repairEntry);
+                configs_entry.put(repairEntry.getRawItem(), repairEntry);
             }
         }
 
         System.out.println("Repair Config Registry has been loaded! (" + configs_entry.size() + " items)");
     }
 
-    public RepairEntry GetEntry(String key)
+    public RepairEntry GetEntry(Item item, RegistryAccess access)
     {
-        if(configs_entry.containsKey(key))
-            return configs_entry.get(key);
-
-        return null;
+        ResourceLocation key = access
+                .registryOrThrow(Registry.ITEM_REGISTRY)
+                .getKey(item);
+        return configs_entry.get(key);
     }
 }

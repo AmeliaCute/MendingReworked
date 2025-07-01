@@ -2,6 +2,7 @@ package AmeliaCute.mendingreworked.mixin;
 
 import AmeliaCute.mendingreworked.util.RepairConfigLoader;
 import AmeliaCute.mendingreworked.util.RepairEntry;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.Item;
@@ -16,6 +17,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.concurrent.atomic.AtomicReference;
 
 @Mixin(AnvilMenu.class)
 public abstract class MixinAnvilMenu extends ItemCombinerMenu
@@ -36,10 +39,14 @@ public abstract class MixinAnvilMenu extends ItemCombinerMenu
         ItemStack right = this.inputSlots.getItem(ADDITIONAL_SLOT);
         if(left.isEmpty() || right.isEmpty()) return;
 
-        RepairEntry entry = RepairConfigLoader.INSTANCE.GetEntry(left.getItem().toString());
+        AtomicReference<RegistryAccess> ref = new AtomicReference<>();
+        this.access.execute((world, pos) -> ref.set(world.registryAccess()));
+        RegistryAccess access = ref.get();
+
+        RepairEntry entry = RepairConfigLoader.INSTANCE.GetEntry(left.getItem(), access);
         if(entry == null) return;
 
-        Item requiredMaterial = entry.getRepair();
+        Item requiredMaterial = entry.getRepair(access);
         if(requiredMaterial == null || !right.is(requiredMaterial)) return;
 
         if(!(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.MENDING, left) > 0)) return;
