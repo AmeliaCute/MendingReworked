@@ -5,6 +5,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.Dynamic;
+import net.minecraft.resources.FileToIdConverter;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
@@ -21,7 +22,7 @@ public class RepairConfigLoader extends SimpleJsonResourceReloadListener
 
 
     private RepairConfigLoader() {
-        super(Codec.PASSTHROUGH, FOLDER);
+        super(Codec.PASSTHROUGH, new FileToIdConverter(FOLDER, ".json"));
     }
 
     @Override
