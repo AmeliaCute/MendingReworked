@@ -37,7 +37,7 @@ public abstract class MixinExperienceOrb
     @Unique
     private boolean isWearingMending(ServerPlayer player, RegistryAccess registryAccess)
     {
-        for (ItemStack stack : player.getInventory().armor)
+        for (ItemStack stack : player.getInventory().getNonEquipmentItems())
         {
             if (hasMending(stack, registryAccess)) return true;
         }
