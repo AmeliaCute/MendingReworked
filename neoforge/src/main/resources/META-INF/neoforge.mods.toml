@@ -30,7 +30,7 @@ side = "BOTH"
 [[dependencies.mendingreworked]]
 modId = "architectury"
 type = "required"
-versionRange = "[15.0.1,)"
+versionRange = "[16.1.4,)"
 ordering = "AFTER"
 side = "BOTH"
 
