@@ -37,9 +37,12 @@ public abstract class MixinAnvilMenu extends ItemCombinerMenu
     {
         ItemStack left = this.inputSlots.getItem(0);
         ItemStack right = this.inputSlots.getItem(1);
-        if(left.isEmpty() || right.isEmpty()) return;
+        if(left.isEmpty() || right.isEmpty() || !left.isDamageableItem()) return;
+        RepairEntry entry;
 
-        RepairEntry entry = RepairConfigLoader.INSTANCE.GetEntry(left.getItem().builtInRegistryHolder().getRegisteredName());
+        entry = RepairConfigLoader.INSTANCE.GetEntry(left.getItem().builtInRegistryHolder().getRegisteredName());
+        if(entry == null) return;   // Need datapack / mod support
+
         Item requiredMaterial = entry.getRepair();
         if(requiredMaterial == null || !right.is(requiredMaterial)) return;
 
