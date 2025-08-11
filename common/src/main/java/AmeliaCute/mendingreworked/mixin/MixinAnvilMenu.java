@@ -1,6 +1,5 @@
 package AmeliaCute.mendingreworked.mixin;
 
-import AmeliaCute.mendingreworked.Mendingreworked;
 import AmeliaCute.mendingreworked.util.RepairConfigLoader;
 import AmeliaCute.mendingreworked.util.RepairEntry;
 import net.minecraft.core.registries.Registries;
@@ -8,14 +7,12 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -37,17 +34,18 @@ public abstract class MixinAnvilMenu extends ItemCombinerMenu
     {
         ItemStack left = this.inputSlots.getItem(0);
         ItemStack right = this.inputSlots.getItem(1);
-        if(left.isEmpty() || right.isEmpty()) return;
+        if(left.isEmpty() || right.isEmpty() || !left.isDamageableItem()) return;
+        RepairEntry entry;
 
-        RepairEntry entry = RepairConfigLoader.INSTANCE.GetEntry(left.getItem().builtInRegistryHolder().getRegisteredName());
+        entry = RepairConfigLoader.INSTANCE.GetEntry(left.getItem().builtInRegistryHolder().getRegisteredName());
+        if(entry == null) return;   // Need datapack / mod support
+
         Item requiredMaterial = entry.getRepair();
         if(requiredMaterial == null || !right.is(requiredMaterial)) return;
 
         if (!(EnchantmentHelper.getItemEnchantmentLevel(
             player.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.MENDING),
             left) > 0)) return;
-
-        if(right.is(Items.ENCHANTED_BOOK)) return;
 
         int damage = left.getDamageValue();
         if(damage == 0 || damage >= left.getMaxDamage()) return;
