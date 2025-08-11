@@ -37,17 +37,20 @@ public abstract class MixinAnvilMenu extends ItemCombinerMenu
     {
         ItemStack left = this.inputSlots.getItem(0);
         ItemStack right = this.inputSlots.getItem(1);
-        if(left.isEmpty() || right.isEmpty()) return;
+        if(left.isEmpty() || right.isEmpty() || !left.isDamageableItem()) return;
+        RepairEntry entry;
 
-        RepairEntry entry = RepairConfigLoader.INSTANCE.GetEntry(left.getItem().builtInRegistryHolder().getRegisteredName());
+        try
+        { entry = RepairConfigLoader.INSTANCE.GetEntry(left.getItem().builtInRegistryHolder().getRegisteredName()); }
+        catch (Exception e)
+        { return; }         // Need a datapack
+
         Item requiredMaterial = entry.getRepair();
         if(requiredMaterial == null || !right.is(requiredMaterial)) return;
 
         if (!(EnchantmentHelper.getItemEnchantmentLevel(
             player.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.MENDING),
             left) > 0)) return;
-
-        if(right.is(Items.ENCHANTED_BOOK)) return;
 
         int damage = left.getDamageValue();
         if(damage == 0 || damage >= left.getMaxDamage()) return;
