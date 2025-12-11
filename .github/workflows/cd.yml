@@ -20,7 +20,7 @@ jobs:
           VERSION="${BRANCH_NAME#main/}"
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "Publishing version: $VERSION"
-          
+
       - name: Get commit SHA (short)
         id: commit
         run: |
@@ -32,7 +32,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '17'
+          java-version: '21'
           cache: 'gradle'
 
       - name: Grant execute permission for gradlew
