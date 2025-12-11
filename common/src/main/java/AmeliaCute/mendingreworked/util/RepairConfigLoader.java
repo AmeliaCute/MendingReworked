@@ -1,10 +1,8 @@
 package AmeliaCute.mendingreworked.util;
 
-import com.google.gson.GsonBuilder;
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.Dynamic;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
@@ -21,19 +19,16 @@ public class RepairConfigLoader extends SimpleJsonResourceReloadListener
 
 
     private RepairConfigLoader() {
-        super(Codec.PASSTHROUGH, FOLDER);
+        super(new Gson(), FOLDER);
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    protected void apply(Object object, ResourceManager resourceManager, ProfilerFiller profilerFiller) {
-        Map<ResourceLocation, Dynamic<JsonElement>> list =
-                (Map<ResourceLocation, Dynamic<JsonElement>>) object;
-
+    protected void apply(Map<ResourceLocation, JsonElement> map, ResourceManager resourceManager, ProfilerFiller profilerFiller) {
         configs_entry.clear();
-        for (Map.Entry<ResourceLocation, Dynamic<JsonElement>> entry : list.entrySet())
+
+        for (Map.Entry<ResourceLocation, JsonElement> entry : map.entrySet())
         {
-            JsonArray array = entry.getValue().getValue().getAsJsonArray();
+            JsonArray array = entry.getValue().getAsJsonArray();
             for(JsonElement element : array)
             {
                 RepairEntry repairEntry = RepairEntry.fromJson(element.getAsJsonObject());

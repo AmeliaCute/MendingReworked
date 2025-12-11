@@ -25,8 +25,8 @@ public abstract class MixinAnvilMenu extends ItemCombinerMenu
     @Shadow private int repairItemCountCost;
     @Shadow @Final private DataSlot cost;
 
-    public MixinAnvilMenu(@Nullable MenuType<?> menuType, int i, Inventory inventory, ContainerLevelAccess containerLevelAccess, ItemCombinerMenuSlotDefinition itemCombinerMenuSlotDefinition) {
-        super(menuType, i, inventory, containerLevelAccess, itemCombinerMenuSlotDefinition);
+    public MixinAnvilMenu(@Nullable MenuType<?> menuType, int i, Inventory inventory, ContainerLevelAccess containerLevelAccess) {
+        super(menuType, i, inventory, containerLevelAccess);
     }
 
     @Inject(method = "createResult", at = @At("HEAD"), cancellable = true)
@@ -52,7 +52,7 @@ public abstract class MixinAnvilMenu extends ItemCombinerMenu
             } else return;
         } else
         {
-            if(!left.get(DataComponents.REPAIRABLE).isValidRepairItem(right)) return;
+            if(!left.getItem().isValidRepairItem(left, right)) return;
             repairPerItem = Math.max(1, (int)(left.getMaxDamage() * 0.25f));
         }
 
