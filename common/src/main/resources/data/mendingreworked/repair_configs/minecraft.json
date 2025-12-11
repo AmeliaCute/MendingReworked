@@ -1,207 +1,9 @@
 [
     {
-      "item": "minecraft:diamond_sword",
-      "repair": "minecraft:diamond",
-      "repair_fraction": 0.25
-    },
-    {
-      "item": "minecraft:diamond_pickaxe",
-      "repair": "minecraft:diamond",
-      "repair_fraction": 0.25
-    },
-    {
-      "item": "minecraft:diamond_axe",
-      "repair": "minecraft:diamond",
-      "repair_fraction": 0.25
-    },
-    {
-      "item": "minecraft:diamond_shovel",
-      "repair": "minecraft:diamond",
-      "repair_fraction": 0.25
-    },
-    {
-      "item": "minecraft:diamond_hoe",
-      "repair": "minecraft:diamond",
-      "repair_fraction": 0.25
-    },
-    {
-      "item": "minecraft:diamond_helmet",
-      "repair": "minecraft:diamond",
-      "repair_fraction": 0.25
-    },
-    {
-      "item": "minecraft:diamond_chestplate",
-      "repair": "minecraft:diamond",
-      "repair_fraction": 0.25
-    },
-    {
-      "item": "minecraft:diamond_leggings",
-      "repair": "minecraft:diamond",
-      "repair_fraction": 0.25
-    },
-    {
-      "item": "minecraft:diamond_boots",
-      "repair": "minecraft:diamond",
-      "repair_fraction": 0.25
-    },
-
-
-
-
-    {
-      "item": "minecraft:golden_sword",
-      "repair": "minecraft:gold_ingot",
-      "repair_fraction": 0.25
-    },
-    {
-      "item": "minecraft:golden_pickaxe",
-      "repair": "minecraft:gold_ingot",
-      "repair_fraction": 0.25
-    },
-    {
-      "item": "minecraft:golden_axe",
-      "repair": "minecraft:gold_ingot",
-      "repair_fraction": 0.25
-    },
-    {
-      "item": "minecraft:golden_shovel",
-      "repair": "minecraft:gold_ingot",
-      "repair_fraction": 0.25
-    },
-    {
-      "item": "minecraft:golden_hoe",
-      "repair": "minecraft:gold_ingot",
-      "repair_fraction": 0.25
-    },
-    {
-      "item": "minecraft:golden_helmet",
-      "repair": "minecraft:gold_ingot",
-      "repair_fraction": 0.25
-    },
-    {
-      "item": "minecraft:golden_chestplate",
-      "repair": "minecraft:gold_ingot",
-      "repair_fraction": 0.25
-    },
-    {
-      "item": "minecraft:golden_leggings",
-      "repair": "minecraft:gold_ingot",
-      "repair_fraction": 0.25
-    },
-    {
-      "item": "minecraft:golden_boots",
-      "repair": "minecraft:gold_ingot",
-      "repair_fraction": 0.25
-    },
-
-
-
-
-    {
-      "item": "minecraft:iron_sword",
-      "repair": "minecraft:ingot_ingot",
-      "repair_fraction": 0.25
-    },
-    {
-      "item": "minecraft:iron_pickaxe",
-      "repair": "minecraft:ingot_ingot",
-      "repair_fraction": 0.25
-    },
-    {
-      "item": "minecraft:iron_axe",
-      "repair": "minecraft:ingot_ingot",
-      "repair_fraction": 0.25
-    },
-    {
-      "item": "minecraft:iron_shovel",
-      "repair": "minecraft:ingot_ingot",
-      "repair_fraction": 0.25
-    },
-    {
-      "item": "minecraft:iron_hoe",
-      "repair": "minecraft:ingot_ingot",
-      "repair_fraction": 0.25
-    },
-    {
-      "item": "minecraft:iron_helmet",
-      "repair": "minecraft:ingot_ingot",
-      "repair_fraction": 0.25
-    },
-    {
-      "item": "minecraft:iron_chestplate",
-      "repair": "minecraft:ingot_ingot",
-      "repair_fraction": 0.25
-    },
-    {
-      "item": "minecraft:iron_leggings",
-      "repair": "minecraft:ingot_ingot",
-      "repair_fraction": 0.25
-    },
-    {
-      "item": "minecraft:iron_boots",
-      "repair": "minecraft:ingot_ingot",
-      "repair_fraction": 0.25
-    },
-
-
-
-
-    {
-      "item": "minecraft:netherite_sword",
-      "repair": "minecraft:netherite_ingot",
-      "repair_fraction": 0.5
-    },
-    {
-      "item": "minecraft:netherite_pickaxe",
-      "repair": "minecraft:netherite_ingot",
-      "repair_fraction": 0.5
-    },
-    {
-      "item": "minecraft:netherite_axe",
-      "repair": "minecraft:netherite_ingot",
-      "repair_fraction": 0.5
-    },
-    {
-      "item": "minecraft:netherite_shovel",
-      "repair": "minecraft:netherite_ingot",
-      "repair_fraction": 0.5
-    },
-    {
-      "item": "minecraft:netherite_hoe",
-      "repair": "minecraft:netherite_ingot",
-      "repair_fraction": 0.5
-    },
-    {
-      "item": "minecraft:netherite_helmet",
-      "repair": "minecraft:netherite_ingot",
-      "repair_fraction": 0.5
-    },
-    {
-      "item": "minecraft:netherite_chestplate",
-      "repair": "minecraft:netherite_ingot",
-      "repair_fraction": 0.5
-    },
-    {
-      "item": "minecraft:netherite_leggings",
-      "repair": "minecraft:netherite_ingot",
-      "repair_fraction": 0.5
-    },
-    {
-      "item": "minecraft:netherite_boots",
-      "repair": "minecraft:netherite_ingot",
-      "repair_fraction": 0.5
-    },
-
-
-
-
-    {
       "item": "minecraft:trident",
       "repair": "minecraft:prismarine_shard",
       "repair_fraction": 0.125
     },
-
-
 
     {
       "item": "minecraft:stone_sword",
@@ -229,8 +31,6 @@
       "repair_fraction": 0.5
     },
 
-
-
     {
       "item": "minecraft:bow",
       "repair": "minecraft:string",
@@ -241,9 +41,6 @@
       "repair": "minecraft:string",
       "repair_fraction": 0.5
     },
-
-
-
 
     {
       "item": "minecraft:wooden_sword",
@@ -274,5 +71,11 @@
       "item": "minecraft:shield",
       "repair": "minecraft:stick",
       "repair_fraction": 0.25
+    },
+
+    {
+      "item": "minecraft:mace",
+      "repair": "minecraft:breeze_rod",
+      "repair_fraction": 0.5
     }
 ]

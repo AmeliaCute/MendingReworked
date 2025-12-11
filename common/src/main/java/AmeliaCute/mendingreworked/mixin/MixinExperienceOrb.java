@@ -29,18 +29,13 @@ public abstract class MixinExperienceOrb
     @Unique
     private boolean hasMending(ItemStack itemStack, RegistryAccess registryAccess)
     {
-        return EnchantmentHelper.getItemEnchantmentLevel(
-                registryAccess.lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.MENDING),
-                itemStack) > 0;
+        return EnchantmentHelper.getItemEnchantmentLevel(registryAccess.lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.MENDING), itemStack) > 0;
     }
 
     @Unique
     private boolean isWearingMending(ServerPlayer player, RegistryAccess registryAccess)
     {
-        for (ItemStack stack : player.getInventory().getNonEquipmentItems())
-        {
-            if (hasMending(stack, registryAccess)) return true;
-        }
+        for (ItemStack stack : player.getInventory().getNonEquipmentItems()) if (hasMending(stack, registryAccess)) return true;
         return false;
     }
 }
