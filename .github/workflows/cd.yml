@@ -47,8 +47,15 @@ jobs:
           curseforge-id: 1244140
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
 
+          curseforge-dependencies: |
+            419699(required)
+            306612(required)
+
           modrinth-id: 2xEpw5CM
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+          modrinth-dependencies: |
+            architectury-api(required)
+            fabric-api(required)
 
           version: ${{ steps.commit.outputs.sha }}-${{ steps.version.outputs.version }}-fabric
           version-type: release
@@ -70,8 +77,13 @@ jobs:
           curseforge-id: 1244140
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
 
+          curseforge-dependencies: |
+            419699(required)
+
           modrinth-id: 2xEpw5CM
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+          modrinth-dependencies: |
+            architectury-api(required)
 
           version: ${{ steps.commit.outputs.sha }}-${{ steps.version.outputs.version }}-neoforge
           version-type: release
