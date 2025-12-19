@@ -33,7 +33,14 @@ public class RepairConfigLoader extends SimpleJsonResourceReloadListener
             {
                 RepairEntry repairEntry = RepairEntry.fromJson(element.getAsJsonObject());
 
-                configs_entry.put(repairEntry.getItem().toString(), repairEntry);
+                try
+                {
+                    configs_entry.put(repairEntry.getItem().toString(), repairEntry);
+                } catch (Exception e)
+                {
+                    System.err.println("[Mending Reworked] Invalid repair entry in " + entry.getKey());
+                    e.printStackTrace();
+                }
             }
         }
 
